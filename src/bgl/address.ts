@@ -31,7 +31,6 @@ export class PublicKey {
   private readonly privateKey: Buffer;
   private readonly compressed: boolean;
 
-
   constructor(privateKey: Buffer, compressed?: boolean) {
     this.privateKey = privateKey;
     this.compressed = compressed || true;
@@ -103,7 +102,7 @@ export function addressToScript(address: Buffer) {
   }
   if (
     [TESTNET_SEGWIT_ADDRESS_PREFIX, MAINNET_SEGWIT_ADDRESS_PREFIX].includes(
-        // @ts-ignore
+      // @ts-ignore
       address.split('1')[0],
     )
   ) {
@@ -140,8 +139,6 @@ export function privateToPublicKey(
   privateKey: Buffer,
   compressed: boolean,
 ): Buffer | null {
-
-
   const pk = new PublicKey(privateKey, compressed);
   return pk.publicKey;
 }

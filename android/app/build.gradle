@@ -134,6 +134,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
+
     }
     splits {
         abi {
@@ -161,6 +164,10 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+     packagingOptions {
+            // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17.
+            exclude "lib/armeabi/**"
         }
     }
 
@@ -215,5 +222,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+project.ext.vectoricons = [
+        iconFontNames: [ "FontAwesome.ttf",  "Ionicons.ttf",  "MaterialIcons.ttf",  "MaterialCommunityIcons.ttf"] // Name of the font files you want to copy
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
