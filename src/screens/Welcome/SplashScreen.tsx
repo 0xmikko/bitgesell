@@ -23,11 +23,10 @@ export function SplashScreen() {
         style={{
           height: 220,
           resizeMode: 'contain',
-          marginBottom: 28,
-          marginTop: -40,
+          marginBottom: 0,
         }}
       />
-      <Text h1>BitGesell Wallet</Text>
+      <Text h1>Bitgesell Wallet</Text>
       <Text
         style={{
           fontSize: 18,

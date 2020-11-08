@@ -3,11 +3,9 @@
  */
 
 import React from 'react';
-import {SendScreen} from './SendScreen';
-import {useDispatch} from 'react-redux';
+import {SendScreen} from '../Home/SendScreen';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {largeTitleStyles} from '../../styles';
-import {Button} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 

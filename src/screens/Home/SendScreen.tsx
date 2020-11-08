@@ -51,21 +51,22 @@ export function SendScreen() {
     }
   }, [operation?.status]);
 
-  const checkValid = () => {
-    console.log(address);
-    console.log(amount);
+  const checkValid = (newAmount: number, newAddress: string) => {
+    console.log(newAddress);
+    console.log(newAmount);
 
-    setIsValid(amount > 0 && address.length > 0);
+    setIsValid(newAmount > 0 && newAddress.length > 0);
   };
 
   const onAddressChange = (newValue: string) => {
-    checkValid();
+    heck111Valid(amount, newValue);
     setAddress(newValue);
   };
 
   const onAmountChange = (newValue: string) => {
-    checkValid();
-    setAmount(parseFloat(newValue === '' ? 0 : newValue));
+    const newValueNum = parseFloat(newValue === '' ? 0 : newValue);
+    checkValid(newValueNum, address);
+    setAmount(newValueNum);
   };
 
   const onSendPressed = () => {
