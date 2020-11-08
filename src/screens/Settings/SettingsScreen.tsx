@@ -18,7 +18,7 @@ export function SettingsScreen() {
   const list = [
     {
       title: 'Backup',
-      icon: 'edit',
+      icon: 'lock',
       action: () => navigation.navigate('ChangeNameScreen'),
     },
   ];
@@ -39,7 +39,7 @@ export function SettingsScreen() {
         <Text h2 style={{margin: 10}}>
           Bitgesell wallet
         </Text>
-        <Text>ver. 0.0.1</Text>
+        <Text>ver. 1.0.0</Text>
       </View>
       <View>
         {list.map((item, i) => (

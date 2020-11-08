@@ -31,7 +31,9 @@ export function getBalance(
         throw new Error('No publick key was found');
       }
       const utxo = await BglNode.getUTXO(address);
+
       const balance = utxo.total_amount;
+
       dispatch({type: 'UPDATE_BALANCE', payload: balance});
 
       console.log(utxo);

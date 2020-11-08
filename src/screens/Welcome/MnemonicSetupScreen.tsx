@@ -2,19 +2,35 @@
  * Copyright (c) 2020. Mikael Lazarev
  */
 
-import React from 'react';
+import {randomBytes} from 'react-native-randombytes';
+import React, {useEffect, useState} from 'react';
 import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import {commonStyles} from '../../styles';
-import {generateMnemonic} from 'bip39';
+import {entropyToMnemonic, generateMnemonic} from 'bip39';
 import {MnemonicWordBlock} from '../../components/MnemonicWord';
 import Clipboard from '@react-native-community/clipboard';
 
 export function MnemonicSetupScreen() {
   const navigation = useNavigation();
+  const [mnemonic, setMnemonic] = useState('');
 
-  const mnemonic = generateMnemonic();
+  const getRandom = (count) =>
+    new Promise((resolve, reject) => {
+      return randomBytes(count, (err, bytes) => {
+        if (err) reject(err);
+        else resolve(bytes);
+      });
+    });
+
+  useEffect(() => {
+    getRandom(16).then((entropy) => {
+      setMnemonic(entropyToMnemonic(entropy));
+    });
+  }, []);
+
+  // const mnemonic = generateMnemonic();
   const mnemonicArray = mnemonic.split(' ');
 
   const mnemonicRendered = [];
@@ -32,23 +48,7 @@ export function MnemonicSetupScreen() {
   }
 
   const onNext = () => {
-    Alert.alert(
-      'Alert Title',
-      'My Alert Msg',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () =>
-            navigation.navigate('VerifyMnemonicScreen', {mnemonic}),
-        },
-      ],
-      {cancelable: false},
-    );
+    navigation.navigate('VerifyMnemonicScreen', {mnemonic});
   };
 
   return (
@@ -73,7 +73,7 @@ export function MnemonicSetupScreen() {
           type="outline"
           buttonStyle={{borderColor: '#000'}}
           titleStyle={{color: '#000'}}
-          style={{marginTop: 10}}
+          style={{marginTop: 15}}
         />
         <Button
           title="Next"

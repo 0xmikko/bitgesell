@@ -31,7 +31,8 @@ export function ReceiveScreen() {
     <SafeAreaView>
       <View style={styles.container}>
         <QRCode value={walletData.address} size={220} />
-        <Text style={{marginTop: 30}}>{walletData.address}</Text>
+        <Text style={{marginTop: 30, fontWeight: 'bold'}}>Your address is:</Text>
+        <Text>{walletData.address}</Text>
         <View
           style={{
             width: '100%',
