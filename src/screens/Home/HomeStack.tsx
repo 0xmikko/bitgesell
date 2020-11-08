@@ -11,6 +11,10 @@ import {SendScreen} from './SendScreen';
 
 const Stack = createNativeStackNavigator();
 
+export type HomeStackParamList = {
+  TransactionDetailsScreen: {id: string};
+};
+
 export function HomeStack() {
   return (
     <Stack.Navigator>

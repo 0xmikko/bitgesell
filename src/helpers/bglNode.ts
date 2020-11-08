@@ -8,6 +8,7 @@ import {getFullUrl} from 'redux-data-connect';
 import {NODE_ADDR, RPC_PASSWORD, RPC_USER} from '../config';
 import {transformAndValidate} from 'class-transformer-validator';
 import {Transaction} from '../bgl/transaction';
+import {Transaction as CTx} from '../core/transaction';
 import {PrivateKey} from '../bgl/privateKey';
 import {PublicKey} from '../bgl/address';
 
@@ -117,5 +118,30 @@ export class BglNode {
     if (request.status !== 200) {
       throw new Error('Network error');
     }
+  }
+
+  static async getTx(txId: string): Promise<CTx> {
+    const request = await axios.post(
+      NODE_ADDR,
+      {
+        jsonrpc: '1.0',
+
+        id: 'curltest',
+        method: 'gettransaction',
+        params: [txId],
+      },
+      {
+        auth: {
+          username: RPC_USER,
+          password: RPC_PASSWORD,
+        },
+      },
+    );
+    if (request.status !== 200) {
+      throw new Error('Network error');
+    }
+
+    const {data} = request;
+    return (await transformAndValidate(CTx, data.result)) as CTx;
   }
 }

@@ -2,9 +2,11 @@
  * Copyright (c) 2020. Mikael Lazarev
  */
 
-export interface Transaction {
+export class Transaction {
   id: string;
   type: 'RECEIVE' | 'SEND';
   amount: number;
-  confirmation: number;
+  confirmations: number;
+  time: number;
+  hex: string;
 }

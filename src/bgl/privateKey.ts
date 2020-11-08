@@ -42,10 +42,8 @@ export class PrivateKey {
     } else {
       if (typeof k === 'string') {
         if (isHex(k)) {
-          console.log('HEXXX');
           this.key = Buffer.from(k, 'hex');
         } else {
-          console.log('WIFFF');
 
           this.compressed = ![
             MAINNET_PRIVATE_KEY_UNCOMPRESSED_PREFIX,
@@ -75,16 +73,6 @@ export class PrivateKey {
     return `${this.wif}`;
   }
 
-  // static createPrivateKey = (
-  //   compressed: boolean = true,
-  //   testnet: boolean = false,
-  // ) => {
-  //   ARGS(A, {compressed: true, testnet: false, wif: true, hex: false});
-  //   if (A.wif) return privateKeyToWif(generateEntropy({hex: false}), A);
-  //   if (A.hex) return S.generateEntropy({hex: true});
-  //   return S.generateEntropy({hex: false});
-  // };
-  //   'KwnSMn88E3TJc4Cfb5RA8YfzyR1agJ2rSydnQcRM3diuBR4swwQg',
   static privateKeyToWif(
     h: Buffer,
     compressed: boolean = true,
@@ -92,15 +80,12 @@ export class PrivateKey {
   ): string {
     let hBuffer = h; //getBuffer(h);
 
-    console.log("P-00", bs58.encode(Buffer.concat([ hBuffer])))
     if (hBuffer.length !== 32) throw new Error('invalid byte string');
     const prefix = Buffer.from(
       testnet
         ? TESTNET_PRIVATE_KEY_BYTE_PREFIX
         : MAINNET_PRIVATE_KEY_BYTE_PREFIX,
     );
-
-    console.log("PREFIX", bs58.encode(Buffer.concat([prefix, hBuffer])))
 
     if (compressed)
       hBuffer = Buffer.concat([prefix, hBuffer, Buffer.from([1])]);

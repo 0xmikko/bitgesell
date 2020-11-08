@@ -8,6 +8,7 @@ import {Text, Avatar} from 'react-native-elements';
 import {Transaction} from '../../core/transaction';
 import redArrow from '../../assets/red.png';
 import greenArrow from '../../assets/green.png';
+import moment from 'moment';
 
 export interface TransactionsListItemProps {
   data: Transaction;
@@ -26,7 +27,9 @@ export function TransactionsListItem({
         </View>
         <View style={styles.textContainer}>
           <View>
-            <Text h4>Hello</Text>
+            <Text h4>
+              {moment(data.time * 1000).format('DD MMMM, YYYY HH:mm') || ''}
+            </Text>
             <Text>{data.id}</Text>
           </View>
         </View>

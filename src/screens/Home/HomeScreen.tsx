@@ -21,7 +21,11 @@ export function HomeScreen() {
   const data: Array<Transaction> = useSelector(transactionsListSelector);
 
   const getList = (opHash: string) => {
-    dispatch(actions.transactions.getTransactionsList(opHash));
+    dispatch(actions.wallet.getBalance(opHash));
+  };
+
+  const onReceivePressed = () => {
+    navigation.navigate('ReceiveScreen');
   };
 
   const onSendPressed = () => {
@@ -38,7 +42,7 @@ export function HomeScreen() {
       <View
         style={{flexDirection: 'row', paddingHorizontal: 20, marginTop: 10}}>
         <View style={{width: '49%', marginRight: '1%'}}>
-          <Button title={'Receive'} onPress={() => {}} />
+          <Button title={'Receive'} onPress={onReceivePressed} />
         </View>
         <View style={{width: '49%', marginLeft: '1%'}}>
           <Button title={'Send'} onPress={onSendPressed} />

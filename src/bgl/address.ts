@@ -51,13 +51,10 @@ export class PublicKey {
   }
 
   address(net: string): string {
-    console.log(this.publicKey);
     if (this.publicKey === null) throw new Error('Null pubkeh');
     const hash = hash160(this.publicKey);
-    console.log(hash.toString('hex'));
 
     const ha = rebase_8_to_5(Array.from(hash), true);
-    console.log('HAS', Buffer.from(rebase_5_to_32(ha)).toString());
     return hashToAddress(ha, net === 'testnet');
 
     // return hrp + '1';
@@ -76,7 +73,6 @@ export function addressToScript(address: Buffer) {
       address[0],
     )
   ) {
-    console.log('===1');
     const s = Buffer.concat([
       Buffer.from([OPCODE.OP_HASH160, 0x14]),
       this.addressToHash(address),
@@ -91,7 +87,6 @@ export function addressToScript(address: Buffer) {
       TESTNET_ADDRESS_PREFIX_2,
     ].includes(address[0])
   ) {
-    console.log('===2');
     const s = Buffer.concat([
       Buffer.from([OPCODE.OP_DUP, OPCODE.OP_HASH160, 0x14]),
       // @ts-ignore
@@ -106,7 +101,6 @@ export function addressToScript(address: Buffer) {
       address.split('1')[0],
     )
   ) {
-    console.log('==3');
     // @ts-ignore
     let h = addressToHash(address);
     const s = Buffer.concat([

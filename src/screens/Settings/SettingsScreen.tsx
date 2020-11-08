@@ -34,14 +34,12 @@ export function SettingsScreen() {
             height: 220,
             resizeMode: 'contain',
             marginBottom: 28,
-            marginTop: -40,
           }}
         />
         <Text h2 style={{margin: 10}}>
           Bitgesell wallet
         </Text>
         <Text>ver. 0.0.1</Text>
-        <Text>{walletData.address}</Text>
       </View>
       <View>
         {list.map((item, i) => (

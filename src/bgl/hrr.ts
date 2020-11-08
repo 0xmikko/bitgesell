@@ -343,18 +343,18 @@ export function hashToAddress(
   // }
   ha.unshift(0); //witnessVersion);
 
-  console.log(ha);
-  console.log('PREFIX', prefix);
+  // console.log(ha);
+  // console.log('PREFIX', prefix);
 
   // @ts-ignore
   let checksum = bech32Polymod(prefix.concat(ha.concat([0, 0, 0, 0, 0, 0])));
 
-  console.log(checksum);
+  // console.log(checksum);
   const checksum2 = rebase_8_to_5(getInt64Bytes(checksum)).slice(2);
 
   const partAddre = rebase_5_to_32(ha.concat(checksum2));
-  console.log(Buffer.from(partAddre).toString());
-  console.log('FINISHED');
+  // console.log(Buffer.from(partAddre).toString());
+  // console.log('FINISHED');
   // @ts-ignore
   return hrp + '1' + Buffer.from(partAddre);
 }

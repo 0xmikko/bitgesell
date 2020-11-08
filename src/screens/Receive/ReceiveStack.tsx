@@ -18,9 +18,9 @@ export function ReceiveStack() {
         component={ReceiveScreen}
         options={{
           title: 'Receive',
-          headerRight: () => (
-            <Button onPress={() => {}} title={'Share'} type="clear" />
-          ),
+          // headerRight: () => (
+          //   <Button onPress={() => {}} title={'Share'} type="clear" />
+          // ),
           ...largeTitleStyles,
         }}
       />

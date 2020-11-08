@@ -59,12 +59,12 @@ export function SendScreen() {
   };
 
   const onAddressChange = (newValue: string) => {
-    heck111Valid(amount, newValue);
+    checkValid(amount, newValue);
     setAddress(newValue);
   };
 
   const onAmountChange = (newValue: string) => {
-    const newValueNum = parseFloat(newValue === '' ? 0 : newValue);
+    const newValueNum = parseFloat(newValue === '' ? '0' : newValue);
     checkValid(newValueNum, address);
     setAmount(newValueNum);
   };
@@ -125,7 +125,7 @@ export function SendScreen() {
           Amount:
         </Text>
         <TextInput
-          value={amount}
+          value={amount.toString()}
           onChangeText={onAmountChange}
           keyboardType={'numeric'}
           style={{
