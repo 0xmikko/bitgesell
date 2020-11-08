@@ -1,0 +1,8 @@
+POST  http://bgluser:bglpassword@178.154.224.220:8332
+Content-Type: application/json
+
+{
+"jsonrpc": "1.0", "id":"curltest", "method": "getblockchaininfo", "params": []
+}
+
+
